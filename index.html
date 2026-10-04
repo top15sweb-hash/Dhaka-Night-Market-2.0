@@ -25,6 +25,25 @@
     <meta name="twitter:image" content="/src/assets/images/the_wedding_show_1790767339554.jpg" />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%23070b19' stroke='%23f59e0b' stroke-width='4'/><text x='50' y='62' font-size='38' font-weight='bold' text-anchor='middle' fill='%23f59e0b'>D</text></svg>" />
 
+    <!-- Resilience Guard: Suppress non-fatal WebSocket / HMR rejections from crashing the runtime in Chrome -->
+    <script>
+      (function() {
+        window.addEventListener('unhandledrejection', function(event) {
+          var reason = event && event.reason;
+          var msg = (reason && (reason.message || reason.toString())) || '';
+          if (
+            msg.indexOf('WebSocket') !== -1 ||
+            msg.indexOf('websocket') !== -1 ||
+            msg.indexOf('WebSocket closed without opened') !== -1 ||
+            msg.indexOf('failed to connect to websocket') !== -1
+          ) {
+            event.preventDefault();
+            console.warn('[Resilience] Handled non-fatal WebSocket state:', msg);
+          }
+        });
+      })();
+    </script>
+
     <!-- Google Fonts for English and Bangla typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

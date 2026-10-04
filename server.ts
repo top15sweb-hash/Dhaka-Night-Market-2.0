@@ -4,6 +4,7 @@
  */
 
 import express, { Request, Response, NextFunction } from 'express';
+import http from 'http';
 import path from 'path';
 import fs from 'fs';
 import crypto from 'crypto';
@@ -17,7 +18,10 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = parseInt(process.env.PORT || '3000', 10);
-const isProd = process.env.NODE_ENV === 'production';
+// Accurately determine production mode: if explicitly production or if built dist/index.html exists outside development
+const isProd =
+  process.env.NODE_ENV === 'production' ||
+  (process.env.NODE_ENV !== 'development' && fs.existsSync(path.join(__dirname, 'dist', 'index.html')));
 
 app.use(express.json({ limit: '15mb' }));
 
@@ -235,10 +239,16 @@ app.post('/api/auth/change-passcode', requireAdminAuth, (req: Request, res: Resp
 // FRONTEND SERVING (Subdomain Routing & SPA Resolution)
 // ----------------------------------------------------
 async function startServer() {
+  const server = http.createServer(app);
+
   if (!isProd) {
+    const disableHmr = process.env.DISABLE_HMR === 'true';
     const { createServer: createViteServer } = await import('vite');
     const vite = await createViteServer({
-      server: { middlewareMode: true },
+      server: {
+        middlewareMode: true,
+        hmr: disableHmr ? false : { server },
+      },
       appType: 'spa',
     });
 
@@ -299,8 +309,8 @@ async function startServer() {
     });
   }
 
-  app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Dhaka Night Market Server running on port ${PORT}`);
+  server.listen(PORT, '0.0.0.0', () => {
+    console.log(`Dhaka Night Market Server running on port ${PORT} [Mode: ${isProd ? 'production' : 'development'}]`);
   });
 }
 
