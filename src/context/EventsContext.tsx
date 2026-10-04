@@ -13,6 +13,12 @@ import React, {
 } from 'react';
 import { EventDetail } from '../types';
 import { INITIAL_EVENTS } from '../data/initialEvents';
+import {
+  safeLocalStorage,
+  safeSessionStorage,
+  safeStorageGetJson,
+  safeStorageSetJson,
+} from '../utils/safeStorage';
 
 const EVENTS_STORAGE_KEY = 'dhaka_events_v5';
 
@@ -55,12 +61,9 @@ function normalizeEvents(list: EventDetail[]): EventDetail[] {
 
 function getInitialEventsFromStorage(): EventDetail[] {
   try {
-    const stored = localStorage.getItem(EVENTS_STORAGE_KEY);
-    if (stored) {
-      const parsed = JSON.parse(stored);
-      if (Array.isArray(parsed) && parsed.length > 0) {
-        return normalizeEvents(parsed);
-      }
+    const parsed = safeStorageGetJson<EventDetail[] | null>(safeLocalStorage, EVENTS_STORAGE_KEY, null);
+    if (Array.isArray(parsed) && parsed.length > 0) {
+      return normalizeEvents(parsed);
     }
   } catch (err) {
     console.warn('Error reading events from storage:', err);
@@ -91,10 +94,7 @@ export const EventsProvider: React.FC<{ children: ReactNode }> = ({
           ) {
             const normalized = normalizeEvents(serverEvents);
             setEvents(normalized);
-            localStorage.setItem(
-              EVENTS_STORAGE_KEY,
-              JSON.stringify(normalized)
-            );
+            safeStorageSetJson(safeLocalStorage, EVENTS_STORAGE_KEY, normalized);
           }
         }
       } catch {
@@ -117,15 +117,11 @@ export const EventsProvider: React.FC<{ children: ReactNode }> = ({
     setEvents(newEvents);
     setLastSaved(new Date());
 
-    try {
-      localStorage.setItem(EVENTS_STORAGE_KEY, JSON.stringify(newEvents));
-    } catch (e) {
-      console.warn('Failed saving to localStorage:', e);
-    }
+    safeStorageSetJson(safeLocalStorage, EVENTS_STORAGE_KEY, newEvents);
 
     try {
       const headers: Record<string, string> = { 'Content-Type': 'application/json' };
-      const token = typeof sessionStorage !== 'undefined' ? sessionStorage.getItem('dnm_admin_token') : null;
+      const token = safeSessionStorage.getItem('dnm_admin_token');
       if (token) headers['Authorization'] = `Bearer ${token}`;
 
       await fetch('/api/events', {

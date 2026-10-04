@@ -4,6 +4,12 @@
  */
 
 import { EnquiryRecord, EnquiryStatus } from '../types';
+import {
+  safeLocalStorage,
+  safeSessionStorage,
+  safeStorageGetJson,
+  safeStorageSetJson,
+} from '../utils/safeStorage';
 
 export const OFFICIAL_ADMIN_EMAIL = 'dhakanightmarket@gmail.com';
 const ENQUIRIES_STORAGE_KEY = 'dnm_enquiries_v1';
@@ -16,11 +22,8 @@ export function generateMailtoUrl(subject: string, body: string): string {
 
 export function getLocalEnquiries(): EnquiryRecord[] {
   try {
-    const raw = localStorage.getItem(ENQUIRIES_STORAGE_KEY);
-    if (raw) {
-      const parsed = JSON.parse(raw);
-      if (Array.isArray(parsed)) return parsed;
-    }
+    const list = safeStorageGetJson<EnquiryRecord[] | null>(safeLocalStorage, ENQUIRIES_STORAGE_KEY, null);
+    if (Array.isArray(list)) return list;
   } catch (e) {
     console.warn('Failed to read enquiries from storage:', e);
   }
@@ -29,7 +32,7 @@ export function getLocalEnquiries(): EnquiryRecord[] {
 
 export function saveLocalEnquiries(list: EnquiryRecord[]): void {
   try {
-    localStorage.setItem(ENQUIRIES_STORAGE_KEY, JSON.stringify(list));
+    safeStorageSetJson(safeLocalStorage, ENQUIRIES_STORAGE_KEY, list);
   } catch (e) {
     console.warn('Failed to save enquiries to storage:', e);
   }
@@ -70,11 +73,13 @@ export async function recordEnquiry(
 
 function getAuthHeaders(): Record<string, string> {
   const headers: Record<string, string> = { 'Content-Type': 'application/json' };
-  if (typeof sessionStorage !== 'undefined') {
-    const token = sessionStorage.getItem('dnm_admin_token');
+  try {
+    const token = safeSessionStorage.getItem('dnm_admin_token');
     if (token) {
       headers['Authorization'] = `Bearer ${token}`;
     }
+  } catch {
+    // Graceful fallback
   }
   return headers;
 }
@@ -84,10 +89,10 @@ export async function fetchAllEnquiries(): Promise<EnquiryRecord[]> {
     const headers = getAuthHeaders();
     const res = await fetch('/api/enquiries', { headers });
     if (res.status === 401 || res.status === 403) {
-      if (typeof sessionStorage !== 'undefined') {
-        sessionStorage.removeItem('dnm_admin_token');
-        sessionStorage.removeItem('dnm_admin_session');
-      }
+      try {
+        safeSessionStorage.removeItem('dnm_admin_token');
+        safeSessionStorage.removeItem('dnm_admin_session');
+      } catch {}
       throw new Error('Unauthorized admin session');
     }
     if (res.ok) {

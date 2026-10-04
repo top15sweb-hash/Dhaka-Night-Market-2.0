@@ -190,7 +190,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, lang }) => {
                   {lang === 'en' ? 'Featured Offerings:' : 'প্রদর্শনীর বিশেষ আকর্ষণ:'}
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-200">
-                  {(lang === 'en' ? currentEvent.offerings.en : currentEvent.offerings.bn).map(
+                  {((lang === 'en' ? currentEvent?.offerings?.en : currentEvent?.offerings?.bn) || []).map(
                     (offering, idx) => (
                       <div key={idx} className="flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0" />

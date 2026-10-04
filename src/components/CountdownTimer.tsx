@@ -45,7 +45,10 @@ export const CountdownTimer: React.FC<CountdownTimerProps> = ({
   onExploreClick,
   className = '',
 }) => {
-  const targetStartTime = new Date(targetDate).getTime();
+  const rawTime = targetDate ? new Date(targetDate).getTime() : NaN;
+  const targetStartTime = !isNaN(rawTime)
+    ? rawTime
+    : new Date('2026-10-09T12:00:00+06:00').getTime();
   // Duration: 2 days (October 9–10, 2026)
   const targetEndTime = targetStartTime + 2 * 24 * 60 * 60 * 1000;
 

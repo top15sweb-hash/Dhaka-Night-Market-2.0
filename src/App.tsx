@@ -19,29 +19,33 @@ import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
 
 export default function App() {
-  // Determine initial page from URL hash or path
+  // Determine initial page from URL hash or path defensively
   const getPageFromUrl = (): PageId => {
-    const hash = window.location.hash.replace(/^#\/?/, '').toLowerCase();
-    const validPages: PageId[] = [
-      'home',
-      'events',
-      'experience',
-      'gallery',
-      'vendors',
-      'partners',
-      'stories',
-      'about',
-      'contact',
-    ];
-    if (validPages.includes(hash as PageId)) {
-      return hash as PageId;
-    }
+    try {
+      const hash = (window.location.hash || '').replace(/^#\/?/, '').toLowerCase();
+      const validPages: PageId[] = [
+        'home',
+        'events',
+        'experience',
+        'gallery',
+        'vendors',
+        'partners',
+        'stories',
+        'about',
+        'contact',
+      ];
+      if (validPages.includes(hash as PageId)) {
+        return hash as PageId;
+      }
 
-    // Check path segments, e.g. /Dhaka-Night-Market/events or /events or /events.html
-    const segments = window.location.pathname.split('/').filter(Boolean);
-    const lastSegment = segments[segments.length - 1]?.replace(/\.html$/, '').toLowerCase();
-    if (lastSegment && validPages.includes(lastSegment as PageId)) {
-      return lastSegment as PageId;
+      // Check path segments, e.g. /Dhaka-Night-Market/events or /events or /events.html
+      const segments = (window.location.pathname || '').split('/').filter(Boolean);
+      const lastSegment = segments[segments.length - 1]?.replace(/\.html$/, '').toLowerCase();
+      if (lastSegment && validPages.includes(lastSegment as PageId)) {
+        return lastSegment as PageId;
+      }
+    } catch {
+      // Fallback on any URIError or location access restriction
     }
 
     return 'home';
@@ -114,8 +118,14 @@ export default function App() {
     const twitterTitle = document.querySelector('meta[name="twitter:title"]');
     if (twitterTitle) twitterTitle.setAttribute('content', currentTitle);
 
-    // Scroll to top upon navigating
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Scroll to top upon navigating with safe fallback
+    try {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch {
+      try {
+        window.scrollTo(0, 0);
+      } catch {}
+    }
   }, [currentPage, lang]);
 
   const handleNavigate = (page: PageId) => {

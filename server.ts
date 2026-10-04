@@ -285,6 +285,15 @@ async function startServer() {
         return res.status(404).send('Not Found');
       }
 
+      // Never serve index.html for missing asset files or API routes (prevents strict MIME type execution blocks in Chrome)
+      if (
+        reqPath.startsWith('/assets/') ||
+        reqPath.startsWith('/api/') ||
+        /\.(js|css|json|png|jpg|jpeg|gif|svg|ico|webp|woff|woff2|ttf|eot)$/i.test(reqPath)
+      ) {
+        return res.status(404).send('Not Found');
+      }
+
       // Default public website delivery
       res.sendFile(path.join(distPath, 'index.html'));
     });

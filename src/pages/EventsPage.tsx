@@ -196,7 +196,7 @@ export const EventsPage: React.FC<EventsPageProps> = ({ onNavigate, lang }) => {
                           {lang === 'en' ? 'OFFICIAL OFFERINGS:' : 'প্রদর্শনীর অফারিংস:'}
                         </p>
                         <div className="flex flex-wrap gap-2">
-                          {(lang === 'en' ? event.offerings.en : event.offerings.bn).map((item, idx) => (
+                          {((lang === 'en' ? event?.offerings?.en : event?.offerings?.bn) || []).map((item, idx) => (
                             <span
                               key={idx}
                               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-slate-900/90 border border-slate-700/80 text-slate-200 text-xs font-medium"
@@ -382,7 +382,7 @@ export const EventsPage: React.FC<EventsPageProps> = ({ onNavigate, lang }) => {
                           {lang === 'en' ? 'EVENT HIGHLIGHTS:' : 'আকর্ষণসমূহ:'}
                         </p>
                         <div className="space-y-1 text-xs text-slate-300">
-                          {(lang === 'en' ? event.offerings.en : event.offerings.bn).slice(0, 4).map((offering, idx) => (
+                          {((lang === 'en' ? event?.offerings?.en : event?.offerings?.bn) || []).slice(0, 4).map((offering, idx) => (
                             <div key={idx} className="flex items-center gap-2">
                               <span className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0" />
                               <span>{offering}</span>

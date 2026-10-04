@@ -36,6 +36,10 @@ import {
 import { EventDetail, Language, PageId, EnquiryRecord, EnquiryStatus } from '../types';
 import { useEvents } from '../context/EventsContext';
 import {
+  safeLocalStorage,
+  safeSessionStorage,
+} from '../utils/safeStorage';
+import {
   OFFICIAL_ADMIN_EMAIL,
   fetchAllEnquiries,
   updateEnquiryStatus,
@@ -91,7 +95,11 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate, lang }) => {
 
   // Authentication State
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
-    return sessionStorage.getItem(SESSION_STORAGE_KEY) === 'true';
+    try {
+      return safeSessionStorage.getItem(SESSION_STORAGE_KEY) === 'true';
+    } catch {
+      return false;
+    }
   });
   const [passcodeInput, setPasscodeInput] = useState('');
   const [showLoginPasscode, setShowLoginPasscode] = useState(false);
@@ -116,7 +124,11 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate, lang }) => {
 
   // Settings State
   const [currentPasscode, setCurrentPasscode] = useState<string>(() => {
-    return localStorage.getItem(PASSCODE_STORAGE_KEY) || 'dnm2026';
+    try {
+      return safeLocalStorage.getItem(PASSCODE_STORAGE_KEY) || 'dnm2026';
+    } catch {
+      return 'dnm2026';
+    }
   });
   const [newPasscode, setNewPasscode] = useState('');
   const [confirmPasscode, setConfirmPasscode] = useState('');
@@ -127,10 +139,10 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate, lang }) => {
 
   // Verify existing token on mount
   useEffect(() => {
-    const token = sessionStorage.getItem('dnm_admin_token');
+    const token = safeSessionStorage.getItem('dnm_admin_token');
     if (!token) {
       setIsAuthenticated(false);
-      sessionStorage.removeItem(SESSION_STORAGE_KEY);
+      safeSessionStorage.removeItem(SESSION_STORAGE_KEY);
       return;
     }
 
@@ -187,9 +199,9 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate, lang }) => {
       if (res.ok) {
         const data = await res.json();
         if (data.token) {
-          sessionStorage.setItem('dnm_admin_token', data.token);
+          safeSessionStorage.setItem('dnm_admin_token', data.token);
         }
-        sessionStorage.setItem(SESSION_STORAGE_KEY, 'true');
+        safeSessionStorage.setItem(SESSION_STORAGE_KEY, 'true');
         setIsAuthenticated(true);
         setPasscodeInput('');
         return;
@@ -202,11 +214,11 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate, lang }) => {
       // Backend unavailable or static hosting fallback
     }
 
-    const stored = localStorage.getItem(PASSCODE_STORAGE_KEY) || 'dnm2026';
+    const stored = safeLocalStorage.getItem(PASSCODE_STORAGE_KEY) || 'dnm2026';
     if (code === stored || code === 'dnm2026') {
       const staticToken = `static_${btoa(Date.now().toString())}`;
-      sessionStorage.setItem('dnm_admin_token', staticToken);
-      sessionStorage.setItem(SESSION_STORAGE_KEY, 'true');
+      safeSessionStorage.setItem('dnm_admin_token', staticToken);
+      safeSessionStorage.setItem(SESSION_STORAGE_KEY, 'true');
       setIsAuthenticated(true);
       setAuthError('');
       setPasscodeInput('');
@@ -217,8 +229,8 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate, lang }) => {
 
   const handleLogout = () => {
     setIsAuthenticated(false);
-    sessionStorage.removeItem(SESSION_STORAGE_KEY);
-    sessionStorage.removeItem('dnm_admin_token');
+    safeSessionStorage.removeItem(SESSION_STORAGE_KEY);
+    safeSessionStorage.removeItem('dnm_admin_token');
   };
 
   // Open Event Editor
@@ -447,7 +459,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate, lang }) => {
       return;
     }
 
-    const token = sessionStorage.getItem('dnm_admin_token');
+    const token = safeSessionStorage.getItem('dnm_admin_token');
     try {
       await fetch('/api/auth/change-passcode', {
         method: 'POST',
@@ -461,7 +473,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onNavigate, lang }) => {
       // Backend optional in static mode
     }
 
-    localStorage.setItem(PASSCODE_STORAGE_KEY, newPasscode);
+    safeLocalStorage.setItem(PASSCODE_STORAGE_KEY, newPasscode);
     setCurrentPasscode(newPasscode);
     setNewPasscode('');
     setConfirmPasscode('');
