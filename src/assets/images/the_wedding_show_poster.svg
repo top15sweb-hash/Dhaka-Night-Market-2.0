@@ -1,0 +1,425 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200" width="900" height="1200">
+  <defs>
+    <!-- Background Stucco Wall Gradient -->
+    <linearGradient id="wallBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCFAF7" />
+      <stop offset="40%" stop-color="#F9F5EE" />
+      <stop offset="80%" stop-color="#F3ECE1" />
+      <stop offset="100%" stop-color="#ECE3D5" />
+    </linearGradient>
+
+    <!-- Arch Shadows -->
+    <linearGradient id="archAlcoveShadow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#C5B8A8" stop-opacity="0.85" />
+      <stop offset="35%" stop-color="#DDD3C5" stop-opacity="0.35" />
+      <stop offset="70%" stop-color="#ECE5DA" stop-opacity="0.1" />
+      <stop offset="100%" stop-color="#F5EFE7" stop-opacity="0" />
+    </linearGradient>
+
+    <!-- Poster Drop Shadows -->
+    <filter id="posterShadow" x="-15%" y="-10%" width="130%" height="120%">
+      <feDropShadow dx="8" dy="16" stdDeviation="16" flood-color="#451a03" flood-opacity="0.2" />
+      <feDropShadow dx="2" dy="4" stdDeviation="6" flood-color="#18181b" flood-opacity="0.1" />
+    </filter>
+
+    <filter id="innerMouldingShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="3" dy="6" stdDeviation="6" flood-color="#78350f" flood-opacity="0.15" />
+    </filter>
+
+    <!-- Foliage Shadow on Wall & Poster -->
+    <filter id="foliageShadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="6" dy="10" stdDeviation="8" flood-color="#451a03" flood-opacity="0.22" />
+    </filter>
+
+    <!-- Bougainvillea Petal Gradients -->
+    <radialGradient id="bract1" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#f43f5e" />
+      <stop offset="45%" stop-color="#db2777" />
+      <stop offset="100%" stop-color="#881337" />
+    </radialGradient>
+    <radialGradient id="bract2" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#fb7185" />
+      <stop offset="50%" stop-color="#e11d48" />
+      <stop offset="100%" stop-color="#9f1239" />
+    </radialGradient>
+    <radialGradient id="bract3" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#fda4af" />
+      <stop offset="45%" stop-color="#ec4899" />
+      <stop offset="100%" stop-color="#be185d" />
+    </radialGradient>
+
+    <!-- Leaf Gradient -->
+    <linearGradient id="leaf" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4ade80" />
+      <stop offset="50%" stop-color="#16a34a" />
+      <stop offset="100%" stop-color="#14532d" />
+    </linearGradient>
+
+    <!-- Peacock Mandala Patterns -->
+    <linearGradient id="tealGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d9488" />
+      <stop offset="50%" stop-color="#0f766e" />
+      <stop offset="100%" stop-color="#115e59" />
+    </linearGradient>
+  </defs>
+
+  <!-- 1. BASE WALL -->
+  <rect width="900" height="1200" fill="url(#wallBg)" />
+
+  <!-- 2. ARCHITECTURAL ARCHWAY ON LEFT -->
+  <g>
+    <path d="M -80,1200 L -80,380 A 380,380 0 0,1 420,380 L 420,1200 Z" fill="#E8DFD3" />
+    <path d="M -80,1200 L -80,380 A 380,380 0 0,1 420,380 L 420,1200 Z" fill="url(#archAlcoveShadow)" />
+    <!-- White Arch Trim -->
+    <path d="M 420,380 L 420,1200" stroke="#FAF8F5" stroke-width="5" />
+    <path d="M 417,380 L 417,1200" stroke="#C5B8A8" stroke-width="1.5" opacity="0.4" />
+  </g>
+
+  <!-- 3. MOUNTED VERTICAL POSTER (x=240 to 680, y=70 to 1130 -> 440 x 1060) -->
+  <g filter="url(#posterShadow)" transform="translate(240, 70)">
+    
+    <!-- White Poster Board Surface -->
+    <rect width="440" height="1060" rx="8" fill="#FFFFFF" />
+
+    <!-- Thin Outer Magenta Border -->
+    <rect x="18" y="18" width="404" height="1024" rx="4" fill="none" stroke="#9d174d" stroke-width="1.8" />
+
+    <!-- Ornate Filigree Corners -->
+    <!-- Top-Left Corner -->
+    <g transform="translate(18, 18)" stroke="#9d174d" fill="none" stroke-width="1.6">
+      <path d="M 0,28 C 12,28 28,12 28,0" />
+      <path d="M 0,18 C 8,18 18,8 18,0" />
+      <circle cx="10" cy="10" r="3" fill="#9d174d" stroke="none" />
+      <path d="M 28,8 C 36,8 40,4 40,0" />
+      <path d="M 8,28 C 8,36 4,40 0,40" />
+    </g>
+
+    <!-- Bottom-Left Corner -->
+    <g transform="translate(18, 1042)" stroke="#9d174d" fill="none" stroke-width="1.6">
+      <path d="M 0,-28 C 12,-28 28,-12 28,0" />
+      <path d="M 0,-18 C 8,-18 18,-8 18,0" />
+      <circle cx="10" cy="-10" r="3" fill="#9d174d" stroke="none" />
+      <path d="M 28,-8 C 36,-8 40,-4 40,0" />
+      <path d="M 8,-28 C 8,-36 4,-40 0,-40" />
+    </g>
+
+    <!-- Bottom-Right Corner -->
+    <g transform="translate(422, 1042)" stroke="#9d174d" fill="none" stroke-width="1.6">
+      <path d="M 0,-28 C -12,-28 -28,-12 -28,0" />
+      <path d="M 0,-18 C -8,-18 -18,-8 -18,0" />
+      <circle cx="-10" cy="-10" r="3" fill="#9d174d" stroke="none" />
+      <path d="M -28,-8 C -36,-8 -40,-4 -40,0" />
+      <path d="M -8,-28 C -8,-36 -4,-40 0,-40" />
+    </g>
+
+    <!-- 3D CARVED ARCH MOULDING (Recessed Archway Framing Inside Poster) -->
+    <g filter="url(#innerMouldingShadow)">
+      <!-- Outer Arch Relief Lip -->
+      <path d="M 45,950 L 45,340 C 45,220 120,180 220,180 C 320,180 395,220 395,340 L 395,950 Z" 
+            fill="#FAF8F5" stroke="#E5DDD0" stroke-width="8" stroke-linejoin="round" />
+      
+      <!-- Stepped Inner Cusped Arch Cut -->
+      <path d="M 52,950 L 52,345 C 52,230 125,190 220,190 C 315,190 388,230 388,345 L 388,950 Z" 
+            fill="#FFFFFF" stroke="#D1C7BA" stroke-width="2" />
+
+      <!-- Delicate Pink Inner Trim Arch with Cusps -->
+      <path d="M 60,950 L 60,355 
+               C 60,310 80,290 100,270 
+               C 120,250 140,230 170,215 
+               C 190,205 210,200 220,200 
+               C 230,200 250,205 270,215 
+               C 300,230 320,250 340,270 
+               C 360,290 380,310 380,355 
+               L 380,950" 
+            fill="none" stroke="#9d174d" stroke-width="1.8" />
+    </g>
+
+    <!-- POSTER TYPOGRAPHY & ARTWORK (Centered at x=220) -->
+    <g transform="translate(220, 0)">
+
+      <!-- PEACOCK MANDALA EMBLEM (Centered at x=0, y=360) -->
+      <g transform="translate(0, 360)">
+        <!-- Mandala Background Circle -->
+        <circle cx="0" cy="0" r="64" fill="#0f766e" opacity="0.12" />
+
+        <!-- Outer Ring of Peacock Eyes (Teal & Gold Mandala Fan) -->
+        <g>
+          <!-- 12 Petal Feather Fan -->
+          <circle cx="0" cy="-54" r="8" fill="#0d9488" stroke="#f59e0b" stroke-width="2.5" />
+          <circle cx="0" cy="-54" r="3.5" fill="#0f172a" />
+
+          <circle cx="27" cy="-47" r="8" fill="#0d9488" stroke="#f59e0b" stroke-width="2.5" />
+          <circle cx="27" cy="-47" r="3.5" fill="#0f172a" />
+
+          <circle cx="47" cy="-27" r="8" fill="#0d9488" stroke="#f59e0b" stroke-width="2.5" />
+          <circle cx="47" cy="-27" r="3.5" fill="#0f172a" />
+
+          <circle cx="54" cy="0" r="8" fill="#0d9488" stroke="#f59e0b" stroke-width="2.5" />
+          <circle cx="54" cy="0" r="3.5" fill="#0f172a" />
+
+          <circle cx="47" cy="27" r="8" fill="#0d9488" stroke="#f59e0b" stroke-width="2.5" />
+          <circle cx="47" cy="27" r="3.5" fill="#0f172a" />
+
+          <circle cx="27" cy="47" r="8" fill="#0d9488" stroke="#f59e0b" stroke-width="2.5" />
+          <circle cx="27" cy="47" r="3.5" fill="#0f172a" />
+
+          <circle cx="0" cy="54" r="8" fill="#0d9488" stroke="#f59e0b" stroke-width="2.5" />
+          <circle cx="0" cy="54" r="3.5" fill="#0f172a" />
+
+          <circle cx="-27" cy="47" r="8" fill="#0d9488" stroke="#f59e0b" stroke-width="2.5" />
+          <circle cx="-27" cy="47" r="3.5" fill="#0f172a" />
+
+          <circle cx="-47" cy="27" r="8" fill="#0d9488" stroke="#f59e0b" stroke-width="2.5" />
+          <circle cx="-47" cy="27" r="3.5" fill="#0f172a" />
+
+          <circle cx="-54" cy="0" r="8" fill="#0d9488" stroke="#f59e0b" stroke-width="2.5" />
+          <circle cx="-54" cy="0" r="3.5" fill="#0f172a" />
+
+          <circle cx="-47" cy="-27" r="8" fill="#0d9488" stroke="#f59e0b" stroke-width="2.5" />
+          <circle cx="-47" cy="-27" r="3.5" fill="#0f172a" />
+
+          <circle cx="-27" cy="-47" r="8" fill="#0d9488" stroke="#f59e0b" stroke-width="2.5" />
+          <circle cx="-27" cy="-47" r="3.5" fill="#0f172a" />
+        </g>
+
+        <!-- Inner Mandala Lace Ring -->
+        <circle cx="0" cy="0" r="42" fill="none" stroke="#0d9488" stroke-width="2" stroke-dasharray="3,3" />
+        <circle cx="0" cy="0" r="34" fill="#047857" opacity="0.2" />
+
+        <!-- Center Peacock Bird (Graceful Silhouette & Neck) -->
+        <g transform="translate(0, 5)">
+          <!-- Royal Peacock Body -->
+          <path d="M 0,22 C -12,18 -18,2 -12,-16 C -8,-28 -2,-38 0,-40 C 2,-38 8,-28 12,-16 C 18,2 12,18 0,22 Z" 
+                fill="#0d9488" stroke="#047857" stroke-width="1.2" />
+          <!-- S-curve Graceful Neck & Head -->
+          <path d="M -3,-24 C -6,-34 0,-44 4,-44 C 8,-44 10,-38 8,-30 C 6,-22 2,-16 0,-10 Z" 
+                fill="#0284c7" />
+          <!-- Beak -->
+          <polygon points="5,-44 11,-42 5,-40" fill="#f59e0b" />
+          <!-- Eye -->
+          <circle cx="3" cy="-42" r="1.5" fill="#ffffff" />
+          <circle cx="3.5" cy="-42" r="0.8" fill="#0f172a" />
+
+          <!-- Crown Feathers -->
+          <circle cx="1" cy="-52" r="2.2" fill="#06b6d4" />
+          <circle cx="5" cy="-55" r="2.2" fill="#06b6d4" />
+          <circle cx="9" cy="-52" r="2.2" fill="#06b6d4" />
+          <line x1="3" y1="-44" x2="1" y2="-50" stroke="#0d9488" stroke-width="1" />
+          <line x1="5" y1="-44" x2="5" y2="-53" stroke="#0d9488" stroke-width="1" />
+          <line x1="7" y1="-44" x2="9" y2="-50" stroke="#0d9488" stroke-width="1" />
+        </g>
+      </g>
+
+      <!-- FILIGREE SCROLLS & 'THE' (y=475) -->
+      <g transform="translate(0, 475)">
+        <!-- Left Flourish -->
+        <g stroke="#9d174d" fill="none" stroke-width="1.8" stroke-linecap="round">
+          <path d="M -35,0 C -55,-10 -75,5 -95,-4" />
+          <path d="M -50,-4 C -65,-12 -80,0 -70,8" />
+          <circle cx="-95" cy="-4" r="2.5" fill="#9d174d" />
+        </g>
+        <!-- 'THE' -->
+        <text x="0" y="6" font-family="'Cinzel', Georgia, serif" font-size="24" font-weight="700" letter-spacing="6" fill="#831843" text-anchor="middle">
+          THE
+        </text>
+        <!-- Right Flourish -->
+        <g stroke="#9d174d" fill="none" stroke-width="1.8" stroke-linecap="round">
+          <path d="M 35,0 C 55,-10 75,5 95,-4" />
+          <path d="M 50,-4 C 65,-12 80,0 70,8" />
+          <circle cx="95" cy="-4" r="2.5" fill="#9d174d" />
+        </g>
+      </g>
+
+      <!-- 'WEDDING' (y=535) -->
+      <text x="0" y="535" font-family="'Cinzel', 'Playfair Display', Georgia, serif" font-size="52" font-weight="900" letter-spacing="3" fill="#831843" text-anchor="middle">
+        WEDDING
+      </text>
+
+      <!-- 'SHOW' (y=590) -->
+      <text x="0" y="590" font-family="'Cinzel', 'Playfair Display', Georgia, serif" font-size="50" font-weight="900" letter-spacing="4" fill="#831843" text-anchor="middle">
+        SHOW
+      </text>
+
+      <!-- 'PREMIER WEDDING' & '& LIFESTYLE EXHIBITION' (y=628, 648) -->
+      <text x="0" y="628" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="15" font-weight="800" letter-spacing="1.5" fill="#831843" text-anchor="middle">
+        PREMIER WEDDING
+      </text>
+      <text x="0" y="648" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="15" font-weight="800" letter-spacing="1.5" fill="#831843" text-anchor="middle">
+        &amp; LIFESTYLE EXHIBITION
+      </text>
+
+      <!-- GOLD DIVIDER WITH DIAMOND (y=675) -->
+      <g transform="translate(0, 675)" stroke="#ca8a04" fill="none" stroke-width="1.2">
+        <line x1="-120" y1="0" x2="-18" y2="0" />
+        <!-- Diamond Center -->
+        <polygon points="0,-4 4,0 0,4 -4,0" fill="#ca8a04" />
+        <circle cx="-10" cy="0" r="1.5" fill="#ca8a04" />
+        <circle cx="10" cy="0" r="1.5" fill="#ca8a04" />
+        <line x1="18" y1="0" x2="120" y2="0" />
+      </g>
+
+      <!-- DATES: 09 | 10 October 2026 (y=715) -->
+      <text x="0" y="715" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="24" text-anchor="middle">
+        <tspan fill="#9d174d" font-weight="800">09 | 10 </tspan>
+        <tspan fill="#4c0519" font-weight="800">October 2026</tspan>
+      </text>
+
+      <!-- HOURS: 12PM to 12AM (y=745) -->
+      <text x="0" y="745" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="16" font-weight="800" letter-spacing="0.5" fill="#4c0519" text-anchor="middle">
+        12PM to 12AM
+      </text>
+
+      <!-- CO-BRANDING SECTION AT BOTTOM (y=840) -->
+      <g transform="translate(0, 840)">
+        <!-- Left: SHERATON DHAKA -->
+        <g transform="translate(-75, 0)" text-anchor="middle">
+          <!-- Laurel Wreath -->
+          <g stroke="#18181b" fill="none" stroke-width="1.4">
+            <path d="M -12,3 C -17,-3 -17,-13 -10,-17 C -5,-20 -2,-20 0,-20" />
+            <path d="M 12,3 C 17,-3 17,-13 10,-17 C 5,-20 2,-20 0,-20" />
+            <circle cx="0" cy="-6" r="6" fill="#18181b" />
+            <text x="0" y="-3.5" font-family="'Cinzel', serif" font-size="7.5" font-weight="900" fill="#ffffff">S</text>
+          </g>
+          <text y="14" font-family="'Cinzel', Georgia, serif" font-size="11" font-weight="800" letter-spacing="1.5" fill="#18181b">
+            SHERATON
+          </text>
+          <text y="24" font-family="'Plus Jakarta Sans', Arial, sans-serif" font-size="8" font-weight="600" fill="#64748b">
+            Dhaka
+          </text>
+        </g>
+
+        <!-- Vertical Divider Line -->
+        <line x1="0" y1="-18" x2="0" y2="30" stroke="#e2e8f0" stroke-width="1.2" />
+
+        <!-- Right: NIBEDITA -->
+        <g transform="translate(75, 0)" text-anchor="middle">
+          <!-- Gold Monogram N -->
+          <g transform="translate(0, -6)">
+            <text x="0" y="0" font-family="'Cinzel', serif" font-size="19" font-weight="900" fill="#ca8a04">
+              N
+            </text>
+          </g>
+          <text y="14" font-family="'Plus Jakarta Sans', sans-serif" font-size="13" font-weight="800" fill="#18181b">
+            Nibedita
+          </text>
+          <text y="24" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="500" fill="#64748b">
+            a better you
+          </text>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <!-- 4. RIGHT SIDE BOUGAINVILLEA VINES & FLOWERS (DRAPING ACROSS WALL AND TOP-RIGHT POSTER) -->
+  <g id="bougainvillea" filter="url(#foliageShadow)">
+    
+    <!-- Main Vine Stems -->
+    <path d="M 920,-20 C 800,60 740,160 670,280 C 640,340 620,420 650,520 C 680,620 720,740 760,860" 
+          stroke="#713f12" stroke-width="6" fill="none" opacity="0.45" />
+    <path d="M 860,80 C 760,180 700,320 720,440 C 740,540 790,660 810,780" 
+          stroke="#854d0e" stroke-width="4.5" fill="none" opacity="0.4" />
+    <path d="M 910,220 C 780,300 730,420 760,560" 
+          stroke="#78350f" stroke-width="3.5" fill="none" opacity="0.35" />
+
+    <!-- CLUSTER 1: Top Right Wall Overhang -->
+    <g transform="translate(800, 60)">
+      <ellipse cx="-40" cy="20" rx="30" ry="16" transform="rotate(-35 -40 20)" fill="url(#leaf)" />
+      <ellipse cx="15" cy="50" rx="28" ry="15" transform="rotate(40 15 50)" fill="url(#leaf)" />
+      <ellipse cx="-75" cy="65" rx="32" ry="16" transform="rotate(15 -75 65)" fill="url(#leaf)" />
+
+      <!-- Flower Blossoms -->
+      <g transform="translate(-30, 25)">
+        <path d="M 0,0 C -38,-20 -58,12 -28,42 C 12,32 28,6 0,0 Z" fill="url(#bract1)" />
+        <path d="M 8,6 C 36,-18 64,16 34,46 C -6,40 -16,16 8,6 Z" fill="url(#bract2)" />
+        <path d="M 0,18 C -18,52 18,62 38,36 C 26,12 0,6 0,18 Z" fill="url(#bract3)" />
+        <circle cx="8" cy="24" r="4" fill="#fef08a" />
+      </g>
+      <g transform="translate(35, 55)">
+        <path d="M 0,0 C -32,-18 -50,10 -22,36 C 10,26 22,6 0,0 Z" fill="url(#bract2)" />
+        <path d="M 6,5 C 28,-16 54,16 28,42 C -4,36 -14,16 6,5 Z" fill="url(#bract1)" />
+        <circle cx="6" cy="18" r="3.5" fill="#fef08a" />
+      </g>
+    </g>
+
+    <!-- CLUSTER 2: Draping Across Top-Right Corner of Poster -->
+    <g transform="translate(640, 150)">
+      <ellipse cx="-45" cy="-10" rx="26" ry="14" transform="rotate(-50 -45 -10)" fill="url(#leaf)" />
+      <ellipse cx="-80" cy="35" rx="28" ry="15" transform="rotate(25 -80 35)" fill="url(#leaf)" />
+      <ellipse cx="-25" cy="65" rx="30" ry="16" transform="rotate(-20 -25 65)" fill="url(#leaf)" />
+      <ellipse cx="30" cy="40" rx="28" ry="15" transform="rotate(45 30 40)" fill="url(#leaf)" />
+
+      <g transform="translate(-55, 15)">
+        <path d="M 0,0 C -38,-24 -60,12 -28,44 C 12,32 28,8 0,0 Z" fill="url(#bract1)" />
+        <path d="M 8,6 C 34,-18 60,18 32,48 C -6,42 -18,18 8,6 Z" fill="url(#bract2)" />
+        <path d="M 0,18 C -18,52 18,64 38,38 C 26,12 0,8 0,18 Z" fill="url(#bract3)" />
+        <circle cx="8" cy="24" r="4" fill="#fef08a" />
+      </g>
+
+      <g transform="translate(-5, 45)">
+        <path d="M 0,0 C -42,-26 -68,16 -32,50 C 14,36 32,10 0,0 Z" fill="url(#bract2)" />
+        <path d="M 10,8 C 38,-20 72,20 36,54 C -8,46 -20,20 10,8 Z" fill="url(#bract1)" />
+        <path d="M 0,22 C -22,58 20,70 44,42 C 30,15 0,8 0,22 Z" fill="url(#bract3)" />
+        <circle cx="10" cy="26" r="4.5" fill="#fef08a" />
+      </g>
+    </g>
+
+    <!-- CLUSTER 3: Cascade Along Right Edge of Poster -->
+    <g transform="translate(680, 320)">
+      <ellipse cx="-40" cy="-20" rx="25" ry="13" transform="rotate(-40 -40 -20)" fill="url(#leaf)" />
+      <ellipse cx="-60" cy="25" rx="28" ry="14" transform="rotate(30 -60 25)" fill="url(#leaf)" />
+      <ellipse cx="-15" cy="60" rx="30" ry="15" transform="rotate(-15 -15 60)" fill="url(#leaf)" />
+
+      <g transform="translate(-40, 10)">
+        <path d="M 0,0 C -36,-22 -56,12 -26,42 C 12,30 26,6 0,0 Z" fill="url(#bract1)" />
+        <path d="M 8,6 C 32,-18 58,18 30,46 C -6,40 -16,18 8,6 Z" fill="url(#bract2)" />
+        <path d="M 0,18 C -18,50 18,62 36,36 C 24,12 0,6 0,18 Z" fill="url(#bract3)" />
+        <circle cx="8" cy="22" r="4" fill="#fef08a" />
+      </g>
+
+      <g transform="translate(15, 35)">
+        <path d="M 0,0 C -40,-25 -60,14 -28,45 C 12,32 28,8 0,0 Z" fill="url(#bract2)" />
+        <path d="M 8,8 C 35,-18 66,18 34,50 C -8,44 -18,18 8,8 Z" fill="url(#bract1)" />
+        <circle cx="8" cy="24" r="4" fill="#fef08a" />
+      </g>
+    </g>
+
+    <!-- CLUSTER 4: Mid-Lower Right Drape -->
+    <g transform="translate(710, 520)">
+      <ellipse cx="-35" cy="15" rx="25" ry="13" transform="rotate(-25 -35 15)" fill="url(#leaf)" />
+      <ellipse cx="-10" cy="50" rx="28" ry="14" transform="rotate(35 -10 50)" fill="url(#leaf)" />
+
+      <g transform="translate(-25, 20)">
+        <path d="M 0,0 C -34,-20 -52,10 -24,36 C 10,28 24,6 0,0 Z" fill="url(#bract1)" />
+        <path d="M 6,5 C 28,-16 54,16 26,42 C -5,36 -16,16 6,5 Z" fill="url(#bract2)" />
+        <circle cx="6" cy="20" r="3.5" fill="#fef08a" />
+      </g>
+
+      <g transform="translate(25, 55)">
+        <path d="M 0,0 C -28,-18 -44,10 -20,32 C 10,24 20,4 0,0 Z" fill="url(#bract2)" />
+        <path d="M 5,4 C 24,-14 46,14 24,36 C -4,30 -14,14 5,4 Z" fill="url(#bract1)" />
+        <circle cx="6" cy="17" r="3" fill="#fef08a" />
+      </g>
+    </g>
+
+    <!-- CLUSTER 5: Far Right Wall Full Foliage -->
+    <g transform="translate(860, 240)">
+      <ellipse cx="-50" cy="20" rx="36" ry="18" transform="rotate(15 -50 20)" fill="url(#leaf)" />
+      <ellipse cx="-20" cy="85" rx="38" ry="19" transform="rotate(-30 -20 85)" fill="url(#leaf)" />
+
+      <g transform="translate(-35, 30)">
+        <path d="M 0,0 C -42,-26 -68,16 -32,52 C 16,36 32,10 0,0 Z" fill="url(#bract1)" />
+        <path d="M 10,8 C 40,-20 76,20 38,58 C -8,48 -22,20 10,8 Z" fill="url(#bract2)" />
+        <circle cx="10" cy="27" r="4.8" fill="#fef08a" />
+      </g>
+    </g>
+
+    <!-- Small cluster near bottom right -->
+    <g transform="translate(770, 740)">
+      <ellipse cx="-20" cy="10" rx="22" ry="11" transform="rotate(-20 -20 10)" fill="url(#leaf)" />
+      <g transform="translate(-10, 15)">
+        <path d="M 0,0 C -25,-16 -40,8 -18,28 C 8,20 18,4 0,0 Z" fill="url(#bract1)" />
+        <circle cx="5" cy="15" r="3" fill="#fef08a" />
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,3 @@
+# Cloudflare Pages & Netlify Redirects
+/admin       /404.html   404
+/admin.html  /404.html   404
